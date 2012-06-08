@@ -4,6 +4,12 @@ from feedit.feeds.models import Feed
 from feedit.feeds.forms import OpmlForm
 
 
+def home(request):
+    return render(request, 'feeds/home.html', {
+        'feeds': Feed.objects.all(),
+    })
+
+
 def import_opml(request):
     if request.method == 'POST':
         form = OpmlForm(request.POST, request.FILES)
@@ -17,4 +23,6 @@ def import_opml(request):
             return redirect('feedit.feeds.views.import_opml')
     else:
         form = OpmlForm()
-    return render(request, 'feeds/import_opml.html', {'form': form})
+    return render(request, 'feeds/import_opml.html', {
+        'form': form,
+    })

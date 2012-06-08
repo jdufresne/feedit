@@ -5,5 +5,6 @@ from django.conf.urls.defaults import patterns, url
 # admin.autodiscover()
 
 urlpatterns = patterns('feedit.feeds.views',
+    url(r'^$', 'home'),
     url(r'^import/$', 'import_opml'),
 )
