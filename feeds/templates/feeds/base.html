@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+<ul>
+  <li><a href="{% url feedit.feeds.views.home %}">Home</a></li>
+  <li><a href="{% url feedit.feeds.views.import_opml %}">Import OPML</a></li>
+</ul>
+{% endblock %}
+
+{% block sidebar %}
+<ul>
+  {% for feed in feeds %}
+  <li>{{ feed.title }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

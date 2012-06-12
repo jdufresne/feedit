@@ -1,13 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'feeds/base.html' %}
 
 
 {% block title %}Feed it!{% endblock %}
-
-
-{% block content %}
-<ul>
-  {% for feed in feeds %}
-  <li>{{ feed.title }}</li>
-  {% endfor %}
-</ul>
-{% endblock %}
