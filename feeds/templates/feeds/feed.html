@@ -3,4 +3,23 @@
 
 {% block content %}
 <h1>{{ feed.title }}</h1>
+<form enctype="multipart/form-data"
+	  action="{% url feedit.feeds.views.refresh feed_id=feed.id%}"
+	  method="post">
+  {% csrf_token %}
+  <fieldset>
+	<input type="submit" value="refresh" />
+  </fieldset>
+</form>
+
+{% for entry in feed.entries.all %}
+<div>
+  <h2><a href="{{ entry.link }}">{{ entry.title|safe }}</a></h2>
+  {% if entry.author %}
+  <h3>by {{ entry.author }}</h3>
+  {% endif %}
+  <h4>updated at {{ entry.updated }}</h4>
+  {{ entry.content|safe }}
+</div>
+{% endfor %}
 {% endblock %}

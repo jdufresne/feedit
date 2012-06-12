@@ -11,7 +11,7 @@
 {% block sidebar %}
 <ul>
   {% for feed in feeds %}
-  <li>{{ feed.title }}</li>
+  <li><a href="{% url feedit.feeds.views.feed feed.id %}" title="{{ feed.uri }}">{{ feed.title }}</a></li>
   {% endfor %}
 </ul>
 {% endblock %}
