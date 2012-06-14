@@ -2,10 +2,11 @@
 <html>
   <head>
 	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}stylesheets/base.css" />
   </head>
   <body>
 	{% block header %}{% endblock %}
 	{% block sidebar %}{% endblock %}
-	{% block content %}{% endblock %}
+	<div id="content">{% block content %}{% endblock %}</div>
   </body>
 </html>

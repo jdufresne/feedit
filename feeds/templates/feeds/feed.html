@@ -13,13 +13,15 @@
 </form>
 
 {% for entry in feed.entries.all %}
-<div>
+<div class="entry">
   <h2><a href="{{ entry.link }}">{{ entry.title|safe }}</a></h2>
   {% if entry.author %}
   <h3>by {{ entry.author }}</h3>
   {% endif %}
   <h4>updated at {{ entry.updated }}</h4>
-  {{ entry.content|safe }}
+  <div class="entry-content">
+	{{ entry.content|safe }}
+  </div>
 </div>
 {% endfor %}
 {% endblock %}
