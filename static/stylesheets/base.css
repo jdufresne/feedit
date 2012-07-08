@@ -13,12 +13,31 @@ ul {
 }
 
 a {
-	color: #1155CC;
+	color: #1155cc;
 	text-decoration: none;
 }
 
 a:hover {
 	text-decoration: underline;
+}
+
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+input[type=submit] {
+	border: 1px solid #000000;
+	background-color: #f0f0f0;
+	color: #333333;
+	cursor: pointer;
+}
+
+input[type=submit]:hover {
+	border-color: #1155cc;
+	background-color: #e8e8e8;
+	color: #000000;
 }
 
 header {
@@ -52,7 +71,6 @@ sidebar > ul > li > a {
 	border-left: 2px solid #ffffff;
 }
 
-
 sidebar > ul > li > a:hover {
 	background-color: #eeeeee;
 	border-left: 2px solid #000000;
@@ -60,6 +78,11 @@ sidebar > ul > li > a:hover {
 
 #content {
 	margin-left: 250px;
+	padding-right: 8em;
+}
+
+#refresh-form {
+	float: right;
 }
 
 .entry {

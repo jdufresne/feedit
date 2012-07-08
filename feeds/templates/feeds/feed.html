@@ -2,15 +2,16 @@
 
 
 {% block content %}
-<h1>{{ feed.title }}</h1>
-<form enctype="multipart/form-data"
+<form id="refresh-form"
 	  action="{% url feedit.feeds.views.refresh feed_id=feed.id%}"
 	  method="post">
   {% csrf_token %}
   <fieldset>
-	<input type="submit" value="refresh" />
+	<input class="button-link" type="submit" value="refresh" />
   </fieldset>
 </form>
+
+<h1>{{ feed.title }}</h1>
 
 {% for entry in feed.entries.all %}
 <div class="entry">
