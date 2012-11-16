@@ -4,7 +4,7 @@ import xml.etree.ElementTree
 import feedparser
 from django.shortcuts import get_object_or_404, redirect, render
 from feedit.feeds.models import Feed, Entry
-from feedit.feeds.forms import OpmlForm
+from feedit.feeds.forms import NewFeedForm, OpmlForm
 
 
 def home(request):
@@ -20,11 +20,27 @@ def feed(request, feed_id):
     })
 
 
+def new_feed(request):
+    if request.method == 'POST':
+        form = NewFeedForm(request.POST)
+        if form.is_valid():
+            uri = form.cleaned_data['uri']
+            feed, created = Feed.objects.get_or_create(uri=uri,
+                                                       defaults={'title': uri})
+            return redirect('feedit.feeds.views.feed', feed_id=feed.id)
+    else:
+        form = NewFeedForm()
+    return render(request, 'feeds/new_feed.html', {
+        'form': form,
+    })
+
+
 def refresh(request, feed_id):
     feed = get_object_or_404(Feed, pk=feed_id)
     if request.method == 'POST':
         feed_parsed = feedparser.parse(feed.uri)
         feed.title = feed_parsed.feed.title
+        feed.save()
         for entry_parsed in feed_parsed.entries:
             try:
                 uuid = entry_parsed.id
@@ -32,7 +48,6 @@ def refresh(request, feed_id):
                 # Some feeds don't set the ID properly, fallback to
                 # the URI
                 uuid = entry_parsed.link
-
             try:
                 entry = Entry.objects.get(feed=feed, uuid=uuid)
             except Entry.DoesNotExist:
@@ -43,15 +58,13 @@ def refresh(request, feed_id):
             entry.author = entry_parsed.get('author')
             timestamp = mktime(entry_parsed.updated_parsed)
             entry.updated = datetime.fromtimestamp(timestamp)
-
             try:
                 entry.content = entry_parsed.content[0].value
             except AttributeError:
                 # If the there is no full content, get the summary
                 entry.content = entry_parsed.summary
-
             entry.save()
-    return redirect('feedit.feeds.views.feed', feed_id=feed_id)
+    return redirect('feedit.feeds.views.feed', feed_id=feed.id)
 
 
 def import_opml(request):

@@ -1,10 +1,9 @@
 {% extends 'feeds/base.html' %}
 
-{% block title %}Import subscriptions{% endblock %}
+{% block title %}Add feed{% endblock %}
 
 {% block content %}
-<form enctype="multipart/form-data"
-	  action="{% url feedit.feeds.views.import_opml %}"
+<form action="{% url feedit.feeds.views.new_feed %}"
 	  method="post">
   {% csrf_token %}
   {{ form.non_field_errors }}
@@ -16,7 +15,7 @@
     </fieldset>
   {% endfor %}
   <fieldset>
-	<input type="submit" value="import" />
+	<input type="submit" value="add" />
   </fieldset>
 </form>
 {% endblock %}

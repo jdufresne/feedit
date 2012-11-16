@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 
-
 {% block header %}
 <header>
   <ul>
 	<li><a href="{% url feedit.feeds.views.home %}">Home</a></li>
 	<li><a href="{% url feedit.feeds.views.import_opml %}">Import OPML</a></li>
+	<li><a href="{% url feedit.feeds.views.new_feed %}">Add feed</a></li>
   </ul>
 </header>
 {% endblock %}

@@ -12,11 +12,6 @@ class Feed(models.Model):
     def __unicode__(self):
         return self.title
 
-    def clean(self):
-        if not self.title:
-            self.title = self.uri
-        super(Feed, self).clean()
-
 
 class Entry(models.Model):
     feed = models.ForeignKey(Feed, related_name='entries')
