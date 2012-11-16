@@ -4,7 +4,7 @@ from django.db import models
 class Feed(models.Model):
     uri = models.CharField(max_length=255, unique=True)
     title = models.CharField(max_length=255)
-    #users = models.ManyToManyField('User')
+    users = models.ManyToManyField('User')
 
     class Meta:
         ordering = ['title']
@@ -21,6 +21,7 @@ class Entry(models.Model):
     author = models.CharField(max_length=255, null=True, blank=True)
     updated = models.DateTimeField()
     content = models.TextField()
+    users = models.ManyToManyField('User')
 
     class Meta:
         ordering = ['-updated']
