@@ -1,6 +1,7 @@
 # Django settings for feedit project.
 
 import os
+import tempfile
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
@@ -16,7 +17,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_ROOT, 'feedit.db'),
+        'NAME': os.path.join(tempfile.gettempdir(), 'feedit.db'),
         'USER': None,
         'PASSWORD': None,
         'HOST': None,
