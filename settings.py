@@ -143,4 +143,4 @@ LOGGING = {
 }
 
 # Auth settings
-LOGIN_REDIRECT_URL = '/feeds/' # feeds.views.home
+LOGIN_REDIRECT_URL = '/feeds/' # feedit.feeds.views.home
