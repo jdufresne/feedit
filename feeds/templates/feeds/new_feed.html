@@ -3,8 +3,7 @@
 {% block title %}Add feed{% endblock %}
 
 {% block content %}
-<form action="{% url feedit.feeds.views.new_feed %}"
-	  method="post">
+<form method="post" action="{% url feedit.feeds.views.new_feed %}">
   {% csrf_token %}
   {{ form.non_field_errors }}
   {% for field in form %}

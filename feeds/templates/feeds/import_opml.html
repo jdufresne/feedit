@@ -3,9 +3,9 @@
 {% block title %}Import subscriptions{% endblock %}
 
 {% block content %}
-<form enctype="multipart/form-data"
-	  action="{% url feedit.feeds.views.import_opml %}"
-	  method="post">
+<form method="post"
+	  enctype="multipart/form-data"
+	  action="{% url feedit.feeds.views.import_opml %}">
   {% csrf_token %}
   {{ form.non_field_errors }}
   {% for field in form %}
