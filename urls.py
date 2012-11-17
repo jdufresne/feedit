@@ -4,6 +4,7 @@ admin.autodiscover()
 
 urlpatterns = patterns(
     '',
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^feeds/', include('feedit.feeds.urls')),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
