@@ -3,12 +3,21 @@
 {% block title %}{{ feed.title }}{% endblock %}
 
 {% block content %}
-<form id="refresh-form"
-	  action="{% url feedit.feeds.views.refresh feed_id=feed.id%}"
-	  method="post">
+{% if show_add %}
+<form method="post"
+	  action="{% url feedit.feeds.views.add_feed feed_id=feed.id%}">
   {% csrf_token %}
   <fieldset>
-	<input class="button-link" type="submit" value="refresh" />
+	<input type="submit" value="add" />
+  </fieldset>
+</form>
+{% endif %}
+
+<form method="post"
+	  action="{% url feedit.feeds.views.refresh feed_id=feed.id%}">
+  {% csrf_token %}
+  <fieldset>
+	<input type="submit" value="refresh" />
   </fieldset>
 </form>
 
