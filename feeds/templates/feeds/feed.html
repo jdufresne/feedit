@@ -5,7 +5,7 @@
 {% block content %}
 {% if show_add %}
 <form method="post"
-	  action="{% url feedit.feeds.views.add_feed feed_id=feed.id%}">
+	  action="{% url feedit.feeds.views.add_feed feed_id=feed.id %}">
   {% csrf_token %}
   <fieldset>
 	<input type="submit" value="add" />
@@ -14,7 +14,7 @@
 {% endif %}
 
 <form method="post"
-	  action="{% url feedit.feeds.views.refresh feed_id=feed.id%}">
+	  action="{% url feedit.feeds.views.refresh feed_id=feed.id %}">
   {% csrf_token %}
   <fieldset>
 	<input type="submit" value="refresh" />
@@ -23,7 +23,7 @@
 
 <h1>{{ feed.title }}</h1>
 
-{% for entry in feed.entries.all %}
+{% for entry in entries %}
 <div class="entry">
   <h2><a href="{{ entry.link }}">{{ entry.title|safe }}</a></h2>
   {% if entry.author %}
@@ -33,6 +33,15 @@
   <div class="entry-content">
 	{{ entry.content|safe }}
   </div>
+  {% if user.is_authenticated %}
+    <form method="post"
+		  action="{% url feedit.feeds.views.read entry_id=entry.id %}">
+	  {% csrf_token %}
+	  <fieldset>
+		<input type="submit" value="read" />
+	  </fieldset>
+	</form>
+  {% endif %}
 </div>
 {% endfor %}
 {% endblock %}

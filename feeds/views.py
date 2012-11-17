@@ -19,13 +19,16 @@ def home(request):
 def feed(request, feed_id):
     feed = get_object_or_404(Feed, pk=feed_id)
     if request.user.is_authenticated():
+        entries = feed.entries.exclude(pk__in=request.user.entry_set.all())
         feeds = request.user.feed_set.all()
         show_add = not request.user.feed_set.filter(pk=feed_id).exists()
     else:
+        entries = feed.entries.all()
         feeds = Feed.objects.all()
         show_add = False
     return render(request, 'feeds/feed.html', {
         'feed': feed,
+        'entries': entries,
         'feeds': feeds,
         'show_add': show_add,
     })
@@ -86,6 +89,14 @@ def refresh(request, feed_id):
                 entry.content = entry_parsed.summary
             entry.save()
     return redirect('feedit.feeds.views.feed', feed_id=feed.id)
+
+
+@login_required
+@require_POST
+def read(request, entry_id):
+    entry = get_object_or_404(Entry, pk=entry_id)
+    entry.users.add(request.user)
+    return redirect('feedit.feeds.views.feed', feed_id=entry.feed.id)
 
 
 def import_opml(request):
