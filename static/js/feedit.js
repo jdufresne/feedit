@@ -40,7 +40,7 @@
 		$.ajax(el.attr('action'), {
 			'type': el.attr('method'),
 			'dataType': 'json',
-			'data': el.serializeArray()
+			'data': el.serialize()
 		});
 	}
 })(jQuery);
