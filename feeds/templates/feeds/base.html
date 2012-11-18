@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
+{% load feeds %}
+
 {% block header %}
 <header>
   <ul>
-    <li><a href="{% url feedit.feeds.views.home %}">Home</a></li>
-    <li><a href="{% url feedit.feeds.views.import_opml %}">Import OPML</a></li>
-    <li><a href="{% url feedit.feeds.views.new_feed %}">Add feed</a></li>
     {% if user.is_authenticated %}
+      <li>{{ user }}</li>
       <li><a href="{% url  django.contrib.auth.views.logout %}">Sign out</a></li>
     {% else %}
       <li><a href="{% url django.contrib.auth.views.login %}">Sign in</a></l>
@@ -16,15 +16,5 @@
 {% endblock %}
 
 {% block sidebar %}
-<sidebar>
-  <ul>
-    {% for feed in feeds %}
-    <li>
-      <a href="{% url feedit.feeds.views.feed feed.id %}" title="{{ feed.uri }}">
-        {{ feed.title }}
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
-</sidebar>
+{% if user.is_authenticated %}{% sidebar user %}{% endif %}
 {% endblock %}

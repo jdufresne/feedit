@@ -43,6 +43,8 @@ input[type=submit]:hover {
 header {
 	background-color: #222222;
 	margin-bottom: 2em;
+    text-align: right;
+    color: #ffffff;
 }
 
 header > ul > li {
@@ -64,6 +66,10 @@ sidebar {
 	float: left;
 	width: 230px;
 	padding: 1em 0;
+}
+
+nav {
+    margin-bottom: 2em;
 }
 
 sidebar > ul > li > a {

@@ -1,0 +1,19 @@
+<sidebar>
+  <nav>
+    <ul>
+      <li><a href="{% url feedit.feeds.views.home %}">Home</a></li>
+      <li><a href="{% url feedit.feeds.views.new_feed %}">Add feed</a></li>
+      <li><a href="{% url feedit.feeds.views.import_opml %}">Import OPML</a></li>
+    </ul>
+  </nav>
+  <ul>
+    {% for feed in feeds %}
+      <li>
+        <a href="{% url feedit.feeds.views.feed feed.id %}"
+           title="{{ feed.uri }}">
+          {{ feed.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</sidebar>
