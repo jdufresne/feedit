@@ -1,19 +1,29 @@
 <sidebar>
   <nav>
     <ul>
+      {% if user.is_authenticated %}
+        <li>{{ user }}</li>
+      {% endif %}
       <li><a href="{% url feedit.feeds.views.home %}">Home</a></li>
       <li><a href="{% url feedit.feeds.views.new_feed %}">Add feed</a></li>
       <li><a href="{% url feedit.feeds.views.import_opml %}">Import OPML</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url  django.contrib.auth.views.logout %}">Sign out</a></li>
+      {% else %}
+        <li><a href="{% url django.contrib.auth.views.login %}">Sign in</a></l>
+      {% endif %}
     </ul>
   </nav>
-  <ul>
-    {% for feed in feeds %}
-      <li>
-        <a href="{% url feedit.feeds.views.feed feed.id %}"
-           title="{{ feed.uri }}">
-          {{ feed.title }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+  {% if user.is_authenticated %}
+    <ul>
+      {% for feed in user.feed_set.all %}
+        <li>
+          <a href="{% url feedit.feeds.views.feed feed.id %}"
+             title="{{ feed.uri }}">
+            {{ feed.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
 </sidebar>

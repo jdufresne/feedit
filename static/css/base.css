@@ -40,28 +40,6 @@ input[type=submit]:hover {
 	color: #000000;
 }
 
-header {
-	background-color: #222222;
-	margin-bottom: 2em;
-    text-align: right;
-    color: #ffffff;
-}
-
-header > ul > li {
-	display: inline;
-}
-
-header > ul > li > a {
-	display: inline-block;
-	padding: 0.25em 0.5em;
-	color: #cccccc;
-}
-
-header > ul > li > a:hover {
-	background-color: #333333;
-	color: #ffffff;
-}
-
 sidebar {
 	float: left;
 	width: 230px;

@@ -16,26 +16,20 @@ def json_response(data=None):
 
 
 def home(request):
-    feeds = request.user.feed_set.all() \
-        if request.user.is_authenticated() \
-        else Feed.objects.all()
-    return render(request, 'feeds/home.html', {'feeds': feeds})
+    return render(request, 'feeds/home.html')
 
 
 def feed(request, feed_id):
     feed = get_object_or_404(Feed, pk=feed_id)
     if request.user.is_authenticated():
         entries = feed.unread_by(request.user)
-        feeds = request.user.feed_set.all()
         show_add = not request.user.feed_set.filter(pk=feed_id).exists()
     else:
         entries = feed.entries.all()
-        feeds = Feed.objects.all()
         show_add = False
     return render(request, 'feeds/feed.html', {
         'feed': feed,
         'entries': entries,
-        'feeds': feeds,
         'show_add': show_add,
     })
 

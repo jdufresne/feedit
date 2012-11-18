@@ -2,19 +2,4 @@
 
 {% load feeds %}
 
-{% block header %}
-<header>
-  <ul>
-    {% if user.is_authenticated %}
-      <li>{{ user }}</li>
-      <li><a href="{% url  django.contrib.auth.views.logout %}">Sign out</a></li>
-    {% else %}
-      <li><a href="{% url django.contrib.auth.views.login %}">Sign in</a></l>
-    {% endif %}
-  </ul>
-</header>
-{% endblock %}
-
-{% block sidebar %}
-{% if user.is_authenticated %}{% sidebar user %}{% endif %}
-{% endblock %}
+{% block sidebar %}{% sidebar user %}{% endblock %}
