@@ -26,7 +26,12 @@
 		if (!el.is('.read'))
 		{
 			el.addClass('read');
-			submitAjax(el.find('form'));
+            // Form will not exist for anonymous user
+            var form = el.find('form');
+            if (form.length)
+            {
+			    submitAjax(form);
+            }
 		}
 	}
 
