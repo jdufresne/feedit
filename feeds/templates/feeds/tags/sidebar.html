@@ -1,3 +1,5 @@
+{% load feeds %}
+
 <sidebar>
   <nav>
     <ul>
@@ -17,12 +19,7 @@
   {% if user.is_authenticated %}
     <ul>
       {% for feed in user.feed_set.all %}
-        <li>
-          <a href="{% url feedit.feeds.views.feed feed.id %}"
-             title="{{ feed.uri }}">
-            {{ feed.title }}
-          </a>
-        </li>
+        <li>{% feed_link user feed %}</li>
       {% endfor %}
     </ul>
   {% endif %}

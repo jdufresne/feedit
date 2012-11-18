@@ -1,0 +1,7 @@
+<a href="{% url feedit.feeds.views.feed feed.id %}"
+   title="{{ feed.uri }}">
+  {% if unread %}<strong>{% endif %}
+  {{ feed.title }}
+  {% if unread %}({{ unread }}){% endif %}
+  {% if unread %}</strong>{% endif %}
+</a>
