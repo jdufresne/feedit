@@ -7,6 +7,9 @@ class Feed(models.Model):
     title = models.CharField(max_length=255)
     users = models.ManyToManyField(User)
 
+    def unread_by(self, user):
+        return self.entries.exclude(pk__in=user.entry_set.all())
+
     class Meta:
         ordering = ['title']
 

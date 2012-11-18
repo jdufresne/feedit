@@ -5,19 +5,19 @@
 {% block content %}
 {% if show_add %}
 <form method="post"
-	  action="{% url feedit.feeds.views.add_feed feed_id=feed.id %}">
+      action="{% url feedit.feeds.views.add_feed feed_id=feed.id %}">
   {% csrf_token %}
   <fieldset>
-	<input type="submit" value="add" />
+    <input type="submit" value="add" />
   </fieldset>
 </form>
 {% endif %}
 
 <form method="post"
-	  action="{% url feedit.feeds.views.refresh feed_id=feed.id %}">
+      action="{% url feedit.feeds.views.refresh feed_id=feed.id %}">
   {% csrf_token %}
   <fieldset>
-	<input type="submit" value="refresh" />
+    <input type="submit" value="refresh" />
   </fieldset>
 </form>
 
@@ -27,21 +27,23 @@
 <div class="entry">
   <h2><a href="{{ entry.link }}">{{ entry.title|safe }}</a></h2>
   {% if entry.author %}
-  <h3>by {{ entry.author }}</h3>
+    <h3>by {{ entry.author }}</h3>
   {% endif %}
   <h4>updated at {{ entry.updated }}</h4>
   <div class="entry-content">
-	{{ entry.content|safe }}
+    {{ entry.content|safe }}
   </div>
   {% if user.is_authenticated %}
     <form method="post"
-		  action="{% url feedit.feeds.views.read entry_id=entry.id %}">
-	  {% csrf_token %}
-	  <fieldset>
-		<input type="submit" value="read" />
-	  </fieldset>
-	</form>
+          action="{% url feedit.feeds.views.read entry_id=entry.id %}">
+      {% csrf_token %}
+      <fieldset>
+        <input type="submit" value="read" />
+      </fieldset>
+    </form>
   {% endif %}
 </div>
+{% empty %}
+<p>There are no new entries to read.</p>
 {% endfor %}
 {% endblock %}

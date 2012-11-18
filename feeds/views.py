@@ -25,7 +25,7 @@ def home(request):
 def feed(request, feed_id):
     feed = get_object_or_404(Feed, pk=feed_id)
     if request.user.is_authenticated():
-        entries = feed.entries.exclude(pk__in=request.user.entry_set.all())
+        entries = feed.unread_by(request.user)
         feeds = request.user.feed_set.all()
         show_add = not request.user.feed_set.filter(pk=feed_id).exists()
     else:
