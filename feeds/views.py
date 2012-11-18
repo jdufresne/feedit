@@ -2,11 +2,17 @@ from datetime import datetime
 from time import mktime
 import xml.etree.ElementTree
 import feedparser
+import json
+from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from feedit.feeds.models import Feed, Entry
 from feedit.feeds.forms import NewFeedForm, OpmlForm
+
+
+def json_response(data=None):
+    return HttpResponse(json.dumps(data), content_type='application/json')
 
 
 def home(request):
@@ -96,7 +102,7 @@ def refresh(request, feed_id):
 def read(request, entry_id):
     entry = get_object_or_404(Entry, pk=entry_id)
     entry.users.add(request.user)
-    return redirect('feedit.feeds.views.feed', feed_id=entry.feed.id)
+    return json_response()
 
 
 def import_opml(request):

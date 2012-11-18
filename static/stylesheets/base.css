@@ -88,6 +88,10 @@ sidebar > ul > li > a:hover {
 	border: 2px solid #cccccc;
 }
 
+.active {
+	border-color: #000000;
+}
+
 .entry-content {
 	max-width: 80em;
 }
